@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * This class serve as base class for database related operations.
  * @author yuvraj.thakre
+ * Abstract Class
  */
  
 public abstract class CourseLaunchAbstractDao {

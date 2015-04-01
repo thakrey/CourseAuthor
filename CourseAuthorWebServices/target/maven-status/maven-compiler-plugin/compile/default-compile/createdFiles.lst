@@ -1,11 +1,2 @@
-com\lrn\courselaunch\dbconnectiontest\HibernateTest.class
-com\lrn\courselaunch\exception\LRNException.class
-com\lrn\courselaunch\service\CourseLaunchService.class
-com\lrn\courselaunch\service\imp\CourseLaunchServiceImp.class
-com\lrn\courselaunch\dao\imp\CourseLaunchDaoImp.class
-com\lrn\courselaunch\util\CourseLaunchUtil.class
-com\lrn\courselaunch\model\CourseLaunch.class
-com\lrn\courselaunch\dao\CourseLaunchDao.class
-com\lrn\courselaunch\util\HibernateUtil.class
-com\lrn\courselaunch\dao\CourseLaunchAbstractDao.class
-com\lrn\courselaunch\model\CourseLaunchInfo.class
+com\lrn\model\Module.class
+com\lrn\model\AbstractBaseEntity.class

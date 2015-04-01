@@ -26,6 +26,16 @@
 		<slf4j.version>1.7.5</slf4j.version>
 		<jettyVersion>7.2.0.v20101020</jettyVersion>
 
+		<lrn.jdbc.driverClassName>oracle.jdbc.driver.OracleDriver</lrn.jdbc.driverClassName>
+		<lrn.jdbc.driverType>jdbc:oracle:thin</lrn.jdbc.driverType>
+		<!-- lcec.jdbc.port>1521</lcec.jdbc.port -->
+		<lrn.smtp.host>mailhost.corp.lrn.com</lrn.smtp.host>
+		<lrn.smtp.port>25</lrn.smtp.port>
+		<root_log_level>DEBUG</root_log_level>
+		<log_level>DEBUG</log_level>
+
+		<!-- console email properties -->
+		<console.email.defaultFrom>support@lrn.com</console.email.defaultFrom>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -47,6 +57,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>${spring-framework.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>2.5.6</version>
 		</dependency>
 
 		<!-- Spring ORM support -->
@@ -84,7 +99,12 @@
 			<version>${logback.version}</version>
 			<scope>runtime</scope>
 		</dependency>
-
+		<!-- Oracle 11G Driver -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>oracle</artifactId>
+			<version>11.2.0.3</version>
+		</dependency>
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -105,6 +125,12 @@
 			<version>1.4</version>
 		</dependency>
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.3.2.GA</version>
+		</dependency>
+
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
@@ -116,6 +142,11 @@
 			<version>6.1.26</version>
 		</dependency>
 		<!-- CXF related dependencies -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-frontend-jaxws</artifactId>
@@ -136,9 +167,39 @@
 			<artifactId>cxf-rt-ws-security</artifactId>
 			<version>2.7.7</version>
 		</dependency>
-
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>qa5</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- lcec specific settings -->
+				<lcec.jdbc.ip>10.103.30.30</lcec.jdbc.ip>
+				<lcec.jdbc.serviceName>LCECBQ5</lcec.jdbc.serviceName>
+				<lcec.jdbc.username>lcec</lcec.jdbc.username>
+				<lcec.jdbc.password>lcec</lcec.jdbc.password>
+				<lcec.jdbc.port>1526</lcec.jdbc.port>
 
+				<!-- lcecbulk specific settings -->
+				<lcecbulk.jdbc.ip>10.103.30.30</lcecbulk.jdbc.ip>
+				<lcecbulk.jdbc.serviceName>BULKBQ5</lcecbulk.jdbc.serviceName>
+				<lcecbulk.jdbc.username>lcec_bulk</lcecbulk.jdbc.username>
+				<lcecbulk.jdbc.password>lcec</lcecbulk.jdbc.password>
+				<lcecbulk.jdbc.port>1526</lcecbulk.jdbc.port>
+
+				<!-- SMTP settings -->
+				<lrn.smtp.host>10.103.30.22</lrn.smtp.host>
+				<lrn.smtp.port>25</lrn.smtp.port>
+			</properties>
+		</profile>
+	</profiles>
 	<build>
 		<plugins>
 			<plugin>

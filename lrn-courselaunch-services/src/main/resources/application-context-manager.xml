@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       >
+	<!-- Define all service POJOs -->
+	<!-- userManager - User related business task.. -->
+	<bean id="userManager" class="com.lrn.manager.impl.user.UserManager">
+		<constructor-arg ref="userDao" />
+		<property name="userDao" ref="userDao" />
+	</bean>
+  	
+  	<!-- userProfileManager - UserProfile related business task.. -->
+  	<bean id="userProfileManager" class="com.lrn.manager.impl.user.UserProfileManager">
+		<constructor-arg ref="userDao" />
+		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	<!-- userCustomColumnsManager - UserCustomColumns related business task.. -->
+	<bean id="userCustomColumnsManager" class="com.lrn.manager.impl.user.UserCustomColumnsManager">
+		<constructor-arg ref="userCustomColumnsDao" />
+		<property name="userCustomColumnsDao" ref="userCustomColumnsDao" />
+	</bean>
+	
+	<!-- userCustomColumnEnumManager - UserCustomColumnEnum related business task.. -->
+	<bean id="userCustomColumnEnumManager" class="com.lrn.manager.impl.user.UserCustomColumnEnumManager">
+		<constructor-arg ref="userCustomColumnEnumDao" />
+		<property name="userCustomColumnEnumDao" ref="userCustomColumnEnumDao" />
+	</bean>
+	
+	<!-- userModuleLangPrefManager - UserModuleLangPref related business task.. -->
+	<bean id="userModuleLangPrefManager" class="com.lrn.manager.impl.user.UserModuleLangPrefManager">
+		<constructor-arg ref="userModuleLangPrefDao" />
+		<property name="userModuleLangPrefDao" ref="userModuleLangPrefDao" />
+	</bean>	
+	
+	<!-- userSurveyModuleManager - UserSurveyModule related business task.. -->
+	<bean id="userSurveyModuleManager" class="com.lrn.manager.impl.user.UserSurveyModuleManager">
+		<constructor-arg ref="userSurveyModuleDao" />
+		<property name="userSurveyModuleDao" ref="userSurveyModuleDao" />
+	</bean>
+	
+	<!-- userCurriculumManager - UserCurriculum related business task.. -->
+	<bean id="userCurriculumManager" class="com.lrn.manager.impl.user.UserCurriculumManager">
+		<constructor-arg ref="userCurriculumDao" />
+		<property name="userCurriculumDao" ref="userCurriculumDao" />
+	</bean>
+	
+	<!-- siteManager - Site related business task.. -->
+  	<bean id="siteManager" class="com.lrn.manager.impl.site.SiteManager">
+    	<constructor-arg ref="siteDao"/>
+  		<property name="siteDao" ref="siteDao" />
+  	</bean>
+	
+	<!-- siteSecretkeyManager - SiteSecretkey related business task.. -->
+	<bean id="siteSecretkeyManager" class="com.lrn.manager.impl.site.SiteSecretkeyManager">
+		<constructor-arg ref="siteSecretkeyDao" />
+	</bean>
+	
+	<!-- siteCourseManager - SiteCourse related business task.. -->
+	<bean id="siteCourseManager" class="com.lrn.manager.impl.site.SiteCourseManager">
+		<constructor-arg ref="siteCourseDao" />
+		<property name="siteCourseDao" ref="siteCourseDao" />
+	</bean>
+	
+	<!-- siteConfigsManager - SiteConfigs related business task.. -->
+	<bean id="siteConfigsManager" class="com.lrn.manager.impl.site.SiteConfigsManager">
+		<constructor-arg ref="siteConfigsDao" />
+		<property name="siteConfigsDao" ref="siteConfigsDao" />
+	</bean>
+
+	<!-- siteSettingsManager - SiteSettings related business task.. -->
+	<bean id="siteSettingsManager" class="com.lrn.manager.impl.site.SiteSettingsManager">
+		<constructor-arg ref="siteSettingsDao" />
+		<property name="siteSettingsDao" ref="siteSettingsDao" />
+	</bean>
+	
+	<!-- completionCertificateManager - CompletionCertificate related business task.. -->
+	<bean id="completionCertificateManager" class="com.lrn.manager.impl.CompletionCertificateManager">
+		<constructor-arg ref="completionCertificateDao" />
+		<property name="completionCertificateDao" ref="completionCertificateDao" />
+	</bean>
+	
+	<!-- curriculumManager - Curriculum related business task.. -->
+	 <bean id="curriculumManager" class="com.lrn.manager.impl.curriculum.CurriculumManager">
+		<constructor-arg ref="curriculumDao" />
+		<property name="curriculumDao" ref="curriculumDao" />
+	</bean> 
+	
+	<!-- curriculumCourseManager - CurriculumCourse related business task.. -->
+	<bean id="curriculumCourseManager" class="com.lrn.manager.impl.curriculum.CurriculumCourseManager">
+		<constructor-arg ref="curriculumCourseDao" />
+		<property name="curriculumCourseDao" ref="curriculumCourseDao" />
+	</bean>
+	
+	<!-- curriculumModuleChainManager - CurriculumModuleChain related business task.. -->
+	<bean id="curriculumModuleChainManager" class="com.lrn.manager.impl.curriculum.CurriculumModuleChainManager">
+		<constructor-arg ref="curriculumModuleChainDao" />
+		<property name="curriculumModuleChainDao" ref="curriculumModuleChainDao" />
+	</bean>
+	
+	<!-- jasperAttemptManager - JasperAttempt related business task.. -->
+	<bean id="jasperAttemptManager" class="com.lrn.manager.impl.jasper.JasperAttemptManager">
+		<constructor-arg ref="jasperAttemptDao" />
+		<property name="jasperAttemptDao" ref="jasperAttemptDao" />
+	</bean>
+	
+	<!-- jasperConfigManager - JasperConfig related business task.. -->
+	<bean id="jasperConfigManager" class="com.lrn.manager.impl.jasper.JasperConfigManager">
+		<constructor-arg ref="jasperConfigDao" />
+		<property name="jasperConfigDao" ref="jasperConfigDao" />
+	</bean>
+	
+	<!-- preBalsaReportSummaryManager - PreBalsaReportSummary related business task.. -->
+	<bean id="preBalsaReportSummaryManager" class="com.lrn.manager.impl.PreBalsaReportSummaryManager">
+		<constructor-arg ref="preBalsaReportSummaryDao" />
+		<property name="preBalsaReportSummaryDao" ref="preBalsaReportSummaryDao" />
+	</bean>
+	
+	<!-- courseLookupManager - CourseLookup related business task.. -->
+	<bean id="courseLookupManager" class="com.lrn.manager.impl.CourseLookupManager">
+		<constructor-arg ref="courseLookupDao" />
+		<property name="courseLookupDao" ref="courseLookupDao" />	
+	</bean>
+	
+	<!-- sessionsManager - Sessions related business task.. -->
+	<bean id="sessionsManager" class="com.lrn.manager.impl.SessionsManager">
+		<constructor-arg ref="sessionsDao" />
+		<property name="sessionsDao" ref="sessionsDao" />
+	</bean>
+	
+	<!-- passwordRecoverManager - PasswordRecover related business task.. -->
+	<bean id="passwordRecoverManager" class="com.lrn.manager.impl.PasswordRecoverManager">
+		<constructor-arg ref="passwordRecoverDao" />
+		<property name="passwordRecoverDao" ref="passwordRecoverDao" />
+	</bean>
+  	
+  	<!-- customSectionsManager - CustomSections related business task.. -->
+  	<bean id="customSectionsManager" class="com.lrn.manager.impl.custom.CustomSectionsManager">
+		<constructor-arg ref="customSectionsDao" />
+		<property name="customSectionsDao" ref="customSectionsDao" />
+	</bean>
+	
+	
+	<!-- customStringManager - CustomString related business task.. -->
+  	<bean id="customStringManager" class="com.lrn.manager.impl.custom.CustomStringManager">
+		<constructor-arg ref="customStringDao" />
+		<property name="customStringDao" ref="customStringDao" />
+	</bean>
+	
+	<!-- moduleChainMembersManager - ModuleChainMembers related business task.. -->
+	<bean id="moduleChainMembersManager" class="com.lrn.manager.impl.ModuleChainMembersManager">
+		<constructor-arg ref="moduleChainMembersDao" />
+		<property name="moduleChainMembersDao" ref="moduleChainMembersDao" />
+	</bean>
+	
+	<!-- editionDataManager - EditionData related business task.. -->
+	<bean id="editionDataManager" class="com.lrn.manager.impl.EditionDataManager">
+		<constructor-arg ref="editionDataDao" />
+		<property name="editionDataDao" ref="editionDataDao" />
+	</bean>
+	
+	<!-- companyUsersColumnManager - CompanyUsersColumn related business task.. -->
+	<bean id="companyUsersColumnManager" class="com.lrn.manager.impl.CompanyUsersColumnManager">
+		<constructor-arg ref="companyUsersColumnDao" />
+	</bean>
+	
+	<!-- aiccCourseStateManager - AiccCourseState related business task.. -->
+	<bean id="aiccCourseStateManager" class="com.lrn.manager.impl.AiccCourseStateManager">
+		<constructor-arg ref="aiccCourseStateDao" />
+		<property name="aiccCourseStateDao" ref="aiccCourseStateDao" />
+	</bean>
+	
+	<!-- rsaKeysManager - RsaKeys related business task.. -->
+	<bean id="rsaKeysManager" class="com.lrn.manager.impl.RsaKeysManager">
+		<constructor-arg ref="rsaKeysDao" />
+		<property name="rsaKeysDao" ref="rsaKeysDao" />
+	</bean>
+	
+	<!-- rsaKeysTypeManager - RsaKeysType related business task.. -->
+	<bean id="rsaKeysTypeManager" class="com.lrn.manager.impl.RsaKeysTypeManager">
+		<constructor-arg ref="rsaKeysTypeDao" />
+		<property name="rsaKeysTypeDao" ref="rsaKeysTypeDao" />
+	</bean>
+	
+	<!-- srcModuleTemplateManager - SrcModuleTemplate related business task.. -->
+	<bean id="srcModuleTemplateManager" class="com.lrn.manager.impl.SrcModuleTemplateManager">
+		<constructor-arg ref="srcModuleTemplateDao" />
+		<property name="srcModuleTemplateDao" ref="srcModuleTemplateDao" />
+	</bean>
+	
+	<!-- siteBaseCatalogConfigsManager - SiteBaseCatalogConfigs related business task.. -->
+	<bean id="siteBaseCatalogConfigsManager" class="com.lrn.manager.impl.site.SiteBaseCatalogConfigsManager">
+		<constructor-arg ref="siteBaseCatalogConfigsDao" />
+		<property name="siteBaseCatalogConfigsDao" ref="siteBaseCatalogConfigsDao" />
+	</bean>
+	
+	<!-- courseEventsManager - SiteBaseCatalogConfigs related business task.. -->
+	<bean id="courseEventsManager" class="com.lrn.manager.impl.CourseEventsManager">
+		<constructor-arg ref="courseEventsDao" />
+		<property name="courseEventsDao" ref="courseEventsDao" />
+	</bean>
+		
+	<!-- Set up email SMTP connection -->
+  	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <property name="host" value="${lrn.smtp.host}" />
+	    <property name="port" value="${lrn.smtp.port}" />
+	</bean>  
+  	<bean id="messageFactory" class="com.lrn.email.MessageFactory">
+    	<property name="mailSender" ref="mailSender" />
+    	<property name="from" value="${console.email.defaultFrom}" />
+  	</bean>
+  	
+  	<!-- set up templating engine -->
+  	<bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+    	<property name="velocityProperties">
+	      	<props>
+		        <prop key="resource.loader">class</prop>
+		        <prop key="class.resource.loader.class">
+		         	org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+		        </prop>
+	      	</props>
+    	</property>
+  	</bean>  	
+</beans>

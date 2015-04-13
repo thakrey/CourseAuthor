@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.lrn</groupId>
+    <artifactId>lrnsecureservice</artifactId>
+    <version>mainline</version>
+    <name>LRN Secure Service</name>
+    <description>The LRN Secure Service will host all the externalized services.</description>
+    <packaging>war</packaging>
+
+    <repositories>
+        <repository>
+            <id>local-repo</id>
+            <url>http://10.1.107.108:9000/maven2</url>
+        </repository>
+        <repository>
+	        <id>central</id>
+	        <name>Central Repository</name>
+	        <url>http://central.maven.org/maven2</url>
+	        <layout>default</layout>
+	        <snapshots>
+	            <enabled>false</enabled>
+	        </snapshots>
+	    </repository>
+    </repositories>
+
+    <pluginRepositories>
+	    <pluginRepository>
+	      <id>local-repo</id>
+	      <name>Maven Plugin Repository</name>
+	      <url>http://10.1.107.108:9000/maven2</url>
+	    </pluginRepository>
+	  </pluginRepositories>
+	  
+    <reporting>
+        <plugins>
+            <!-- Cobertura is a plugin for code coverage reports -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <formats>
+                        <format>html</format>
+                        <format>xml</format>
+                    </formats>
+                </configuration>
+            </plugin>
+	        
+            <!-- JavaNCSS is a plugin for Lines Of Code reports -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>javancss-maven-plugin</artifactId>
+                <version>2.0-beta-2</version>
+            </plugin>
+
+            <!-- Checkstyle is a plugin for coding style enforcement -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.6</version>
+            </plugin>
+	        
+            <!-- Javadoc plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <!-- our javadoc configuration -->
+                    <stylesheetfile>${basedir}/src/javadoc/api/stylesheet.css
+                    </stylesheetfile>
+                    <javadocDirectory>${basedir}/apidocs</javadocDirectory>
+                    <docfilessubdirs>true</docfilessubdirs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jxr-maven-plugin</artifactId>
+                <configuration>
+                    <!-- our xref configuration -->
+                    <stylesheet>${basedir}/src/javadoc/xref/stylesheet.css</stylesheet>
+                    <docfilessubdirs>true</docfilessubdirs>
+                    <linkJavadoc>true</linkJavadoc>
+                    <javadocDir>${basedir}/apidocs</javadocDir>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
+
+	<dependencies>      
+		<dependency>
+	      	<groupId>commons-lang</groupId>
+	      	<artifactId>commons-lang</artifactId>
+	      	<version>2.6</version>
+    	</dependency>
+    
+	    <!--  Oracle 11G Driver -->
+	    <dependency>
+	        <groupId>com.oracle</groupId>
+	        <artifactId>oracle</artifactId>
+	        <version>11.2.0.3</version>
+	    </dependency>
+        
+	    <!-- Testing -->
+	    <dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.11</version>
+		</dependency>
+		        
+    	<!-- Logging -->
+    	<dependency>
+	      	<groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>1.2.17</version>
+    	</dependency>
+        
+    	<!-- Spring frameowrk -->
+    	<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context</artifactId>
+		    <version>3.2.5.RELEASE</version>
+		</dependency>
+    	<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-context-support</artifactId>
+		    <version>3.2.5.RELEASE</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-beans</artifactId>
+		    <version>3.2.5.RELEASE</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-orm</artifactId>
+		    <version>3.2.5.RELEASE</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		    <version>3.2.5.RELEASE</version>
+		</dependency>		
+		<!-- Services runs without following spring dependency but will be needed while writing test cases -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>3.2.5.RELEASE</version>
+		</dependency>    	
+     
+    	<!-- Hibernate Framework -->
+    	<dependency>
+	      	<groupId>org.hibernate</groupId>
+	      	<artifactId>hibernate-core</artifactId>
+	      	<version>3.3.2.GA</version>
+    	</dependency>
+    	<dependency>
+	      	<groupId>javax.persistence</groupId>
+	      	<artifactId>persistence-api</artifactId>
+	      	<version>1.0</version>
+    	</dependency>
+    	<dependency>
+	      	<groupId>org.hibernate</groupId>
+	      	<artifactId>hibernate-commons-annotations</artifactId>
+	      	<version>3.3.0.ga</version>
+      		<exclusions>
+        		<exclusion>
+		            <artifactId>hibernate</artifactId>
+		            <groupId>org.hibernate</groupId>
+        		</exclusion>
+      		</exclusions>
+    	</dependency>
+    	<dependency>
+	      	<groupId>org.hibernate</groupId>
+	      	<artifactId>hibernate-annotations</artifactId>
+	      	<version>3.4.0.GA</version>
+    	</dependency>
+    	
+    	<!-- Logging dependency -->
+    	<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.7.5</version>
+		</dependency>
+		    
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-jdk14</artifactId>
+		    <version>1.7.5</version>
+		</dependency>
+    	
+    	<!-- Debugging dependency -->
+    	<dependency>
+		    <groupId>javassist</groupId>
+		    <artifactId>javassist</artifactId>
+		    <version>3.12.0.GA</version>
+		</dependency>
+		
+		<!-- Connection pooling dependency -->
+		<dependency>
+		    <groupId>c3p0</groupId>
+		    <artifactId>c3p0</artifactId>
+		    <version>0.9.1.2</version>
+		</dependency>    
+	    
+	    <!-- AOP dependency -->
+	    <dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>3.0</version>
+		</dependency>
+		
+        <!-- Templating Engine -->
+        <dependency>
+            <groupId>velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.5</version>
+        </dependency>
+        
+        <!-- CXF related dependencies -->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>2.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>2.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <version>2.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-ws-security</artifactId>
+            <version>2.7.7</version>
+        </dependency>
+            <dependency>
+        <groupId>org.apache.cxf</groupId>
+        <artifactId>cxf-bundle</artifactId>
+        <version>3.0.0-milestone2</version>
+        <exclusions>
+            <exclusion>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-servlet_3.0_spec</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+        <dependency>
+		    <groupId>org.bouncycastle</groupId>
+		    <artifactId>bcpg-jdk15</artifactId>
+		    <version>1.46</version>
+		</dependency>		
+				
+		<!-- Http component jars -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpcore</artifactId>
+		    <version>4.3.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpmime</artifactId>
+		    <version>4.3.2</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.3.2</version>
+		</dependency>
+    	
+    	<dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
+        </dependency>
+	
+		<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search</artifactId>
+            <version>4.1.1.Final</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hibernate-core</artifactId>
+                    <groupId>org.hibernate</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-analyzers</artifactId>
+            <version>4.1.1.Final</version>
+        </dependency>        
+	</dependencies>
+
+    <!-- Plugins to help development -->
+    <issueManagement>
+        <system>Perforce</system>
+        <url>http://perforce</url>
+    </issueManagement>
+    <build>
+        <finalName>lrnsecureservice</finalName>
+        <plugins>
+           <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.5</version>
+                <configuration>
+                    <requestLog implementation="org.mortbay.jetty.NCSARequestLog">
+                        <filename>target/yyyy_mm_dd.request.log</filename>
+                        <retainDays>10</retainDays>
+                        <append>true</append>
+                        <extended>true</extended>
+                        <logTimeZone>GMT-8</logTimeZone>
+                    </requestLog>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <stylesheetfile>${basedir}/src/javadoc/api/stylesheet.css
+                    </stylesheetfile>
+                    <javadocDirectory>${basedir}/src/javadoc/api</javadocDirectory>
+                    <docfilessubdirs>true</docfilessubdirs>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <!-- add filtering so our profile properties get applied -->
+        <resources>
+            <resource>
+                <directory>src/main/filter</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/templates/email/console</directory>
+            </resource>
+            <resource>
+                <directory>src/main/saml-keys</directory>
+            </resource>
+        </resources>
+    </build>
+    <modules>
+    </modules>
+
+    <!-- Profile Section -->
+    <!-- Common/Default values -->
+    <properties>
+        <lrn.jdbc.driverClassName>oracle.jdbc.driver.OracleDriver</lrn.jdbc.driverClassName>
+        <lrn.jdbc.driverType>jdbc:oracle:thin</lrn.jdbc.driverType>
+        <!-- lcec.jdbc.port>1521</lcec.jdbc.port-->
+        <lrn.smtp.host>mailhost.corp.lrn.com</lrn.smtp.host>
+        <lrn.smtp.port>25</lrn.smtp.port>
+        <root_log_level>DEBUG</root_log_level>
+        <log_level>DEBUG</log_level>
+        
+        <!-- console SAML properties -->
+        <console.saml.encryptionPublicKey>classpath:pubkey.pem</console.saml.encryptionPublicKey>
+        <console.saml.encryptionPrivateKey>classpath:privkey.pem</console.saml.encryptionPrivateKey>
+        <console.saml.encryptionPassPhrase>OHj3OUlPRmCEqgbDhSwa</console.saml.encryptionPassPhrase>
+        <console.saml.signingPublicKey>classpath:signingcert.cer</console.saml.signingPublicKey>
+        <console.saml.signingPrivateKey>classpath:signingprivkey.pem</console.saml.signingPrivateKey>
+        <console.saml.signingPassPhrase>JhdkjaKHsjJsjsjnsSkW</console.saml.signingPassPhrase>
+        
+        <!-- console email properties -->
+        <console.email.defaultFrom>support@lrn.com</console.email.defaultFrom>
+        
+        <!-- Environment name -->
+        <environment.name>environment</environment.name>
+        
+        <!-- Fields required for export feature -->
+    	<respository.path>C:/workspace/codebase/lrn_workspace_java/</respository.path>
+    	<lms.branch.name>lms_maint201404</lms.branch.name>
+    	<export.zip.folder.path>C:/workspace/test/ZIP/</export.zip.folder.path>
+    	<export.zip.folder.name>zip</export.zip.folder.name>    	
+    	<content.base.path>/lcec/share/2acontent-qa8/</content.base.path>
+     	<common.base.path>/lcec/share/2acontent-qa8/</common.base.path>
+     	<lms.base.path></lms.base.path>
+    </properties>
+
+    <profiles>
+        <!-- Dev build profile -->
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <!-- Default properties (Dev) -->
+            <properties>
+                <!-- lcec specific settings -->
+                <lcec.jdbc.ip>10.103.30.41</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>lcecbd2</lcec.jdbc.serviceName>
+                <lcec.jdbc.username>lcec</lcec.jdbc.username>
+                <lcec.jdbc.password>lcec</lcec.jdbc.password>
+                <lcec.jdbc.port>1521</lcec.jdbc.port>
+                
+                <!-- SMTP settings -->
+                <lrn.smtp.host>172.16.40.45</lrn.smtp.host>
+                <lrn.smtp.port>25</lrn.smtp.port>
+                
+                <!-- Environment name -->
+        		<environment.name>dev</environment.name>
+        		
+        		<!-- Fields required for export feature -->
+        		<content.base.path>/lcec/share/2acontent-qa8/</content.base.path>
+        		<common.base.path>/lcec/share/2acontent-qa8/</common.base.path>
+        		<lms.base.path></lms.base.path>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>dev_india</id>
+            <!-- India properties (Dev) -->
+            <properties>
+                <!-- lcec specific settings -->
+                <lcec.jdbc.ip>172.16.30.36</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>lcecbmd3</lcec.jdbc.serviceName>
+                <lcec.jdbc.username>lcec</lcec.jdbc.username>
+                <lcec.jdbc.password>lcec</lcec.jdbc.password>
+                <lcec.jdbc.port>1526</lcec.jdbc.port>
+                
+                <!-- SMTP settings -->
+                <lrn.smtp.host>172.16.40.45</lrn.smtp.host>
+                <lrn.smtp.port>25</lrn.smtp.port>
+                
+                <!-- Environment name -->
+        		<environment.name>dev_india</environment.name>
+        		
+        		<!-- Fields required for export feature -->
+        		<!-- Fields required for export feature -->
+        		<custom.path>C:/kishore/perforce/kishore.ohal_MUMW7L191_6410/depot/lcec/doc/customcontent/</custom.path>
+        		<respository.path>C:/kishore/EcllipseWorkSpaceNew/codeBaseNew/</respository.path>
+        		<content.base.path>c:/kishore/perforce/kishore.ohal_MUMW7L191_6410/depot/lcec/2acontent/</content.base.path>
+        		<common.base.path>c:/kishore/perforce/kishore.ohal_MUMW7L191_6410/depot/lcec/2acommon/</common.base.path>
+        		<lms.branch.name>main_v32</lms.branch.name>
+        		<lms.base.path>c:/kishore/perforce/kishore.ohal_MUMW7L191_6410/depot/lcec/</lms.base.path>
+        		<export.zip.folder.path>C:/Softwares/kishore/apache-tomcat-6.0.41/webapps/export-course/</export.zip.folder.path>
+        		<export.zip.folder.name>export-course</export.zip.folder.name>
+            </properties>
+        </profile>
+
+        <!-- QA Build profile -->
+        <profile>
+            <id>qa2</id>
+            <properties>
+                <!-- lcec specific settings -->
+                <lcec.jdbc.ip>10.103.30.33</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>LCECBQ2</lcec.jdbc.serviceName>
+                <lcec.jdbc.username>lcec</lcec.jdbc.username>
+                <lcec.jdbc.password>lcec</lcec.jdbc.password>
+                <lcec.jdbc.port>1526</lcec.jdbc.port>
+                
+                <!-- SMTP settings -->
+                <lrn.smtp.host>10.103.30.22</lrn.smtp.host>
+                <lrn.smtp.port>25</lrn.smtp.port>
+                
+                <!-- Environment name -->
+        		<environment.name>qa2</environment.name>
+        		
+        		<!-- Fields required for export feature -->
+        		<respository.path>C:/workspace/codebase/lrn_workspace_java/</respository.path>
+        		<lms.branch.name>lms_maint201404</lms.branch.name>
+        		<export.zip.folder.path>C:/Program Files (x86)/Apache Software Foundation/Tomcat 6.0/webapps/zip/</export.zip.folder.path>
+        		<export.zip.folder.name>zip</export.zip.folder.name>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>qa4</id>
+            <properties>
+                <!-- lcec specific settings -->
+                <lcec.jdbc.ip>10.103.30.30</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>lcecgq4</lcec.jdbc.serviceName>
+                <lcec.jdbc.username>lcec</lcec.jdbc.username>
+                <lcec.jdbc.password>lcec</lcec.jdbc.password>
+                <lcec.jdbc.port>1521</lcec.jdbc.port>
+                
+                <!-- SMTP settings -->
+                <lrn.smtp.host>10.103.30.22</lrn.smtp.host>
+                <lrn.smtp.port>25</lrn.smtp.port>
+                
+                <!-- Environment name -->
+        		<environment.name>qa4</environment.name>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>qa5</id>
+            <properties>
+                <!-- lcec specific settings -->
+                <lcec.jdbc.ip>10.103.30.30</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>LCECBQ5</lcec.jdbc.serviceName>
+                <lcec.jdbc.username>lcec</lcec.jdbc.username>
+                <lcec.jdbc.password>lcec</lcec.jdbc.password>
+                <lcec.jdbc.port>1526</lcec.jdbc.port>
+                
+                <!-- SMTP settings -->
+                <lrn.smtp.host>10.103.30.22</lrn.smtp.host>
+                <lrn.smtp.port>25</lrn.smtp.port>
+                
+                <!-- Environment name -->
+        		<environment.name>qa7</environment.name>
+        		
+        		<!-- Fields required for export feature -->
+        		<custom.path>/lcec/doc/customcontent/</custom.path>
+        		<respository.path>/lcec/doc/</respository.path>
+        		<content.base.path>/lcec/share/2acontent-qa8/</content.base.path>
+        		<common.base.path>/lcec/share/2acommon-qa8/</common.base.path>
+        		<lms.base.path>/lcec/doc/upload/</lms.base.path>
+        		<lms.branch.name>rel20140708</lms.branch.name>
+        		<export.zip.folder.path>/usr/share/tomcat7/webapps/export-course/</export.zip.folder.path>
+        		<export.zip.folder.name>export-course</export.zip.folder.name>        		
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>qa10</id>
+            <properties>
+                <!-- lcec specific settings -->
+                <lcec.jdbc.ip>10.103.30.30</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>LCECBQ5</lcec.jdbc.serviceName>
+                <lcec.jdbc.username>lcec</lcec.jdbc.username>
+                <lcec.jdbc.password>lcec</lcec.jdbc.password>
+                <lcec.jdbc.port>1526</lcec.jdbc.port>
+                
+                <!-- SMTP settings -->
+                <lrn.smtp.host>10.103.30.22</lrn.smtp.host>
+                <lrn.smtp.port>25</lrn.smtp.port>
+                
+                <!-- Environment name -->
+        		<environment.name>qa10</environment.name>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>qa7</id>
+            <properties>
+                <!-- lcec specific settings -->
+                <lcec.jdbc.ip>10.103.30.30</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>LCECBQ5</lcec.jdbc.serviceName>
+                <lcec.jdbc.username>lcec</lcec.jdbc.username>
+                <lcec.jdbc.password>lcec</lcec.jdbc.password>
+                <lcec.jdbc.port>1526</lcec.jdbc.port>
+                
+                <!-- SMTP settings -->
+                <lrn.smtp.host>10.103.30.22</lrn.smtp.host>
+                <lrn.smtp.port>25</lrn.smtp.port>
+                
+                <!-- Environment name -->
+        		<environment.name>qa7</environment.name>
+        		
+        		<!-- Fields required for export feature -->
+        		<respository.path>/lcec/doc/</respository.path>
+        		<content.base.path>/lcec/share/2acontent-qa8/</content.base.path>
+        		<common.base.path>/lcec/share/2acontent-qa8/</common.base.path>
+        		<lms.base.path>/lcec/doc/upload/</lms.base.path>
+        		<lms.branch.name>rel20140708</lms.branch.name>
+        		<export.zip.folder.path>/usr/share/tomcat7/webapps/export-course/</export.zip.folder.path>
+        		<export.zip.folder.name>export-course</export.zip.folder.name>
+            </properties>
+        </profile>
+
+		<profile>
+            <id>qa12</id>
+            <properties>
+                <!-- lcec specific settings -->
+                <lcec.jdbc.ip>10.103.30.30</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>LCECBQ5</lcec.jdbc.serviceName>
+                <lcec.jdbc.username>lcec</lcec.jdbc.username>
+                <lcec.jdbc.password>lcec</lcec.jdbc.password>
+                <lcec.jdbc.port>1526</lcec.jdbc.port>
+                
+                <!-- SMTP settings -->
+                <lrn.smtp.host>10.103.30.22</lrn.smtp.host>
+                <lrn.smtp.port>25</lrn.smtp.port>
+                
+                <!-- Environment name -->
+        		<environment.name>qa12</environment.name>
+            </properties>
+        </profile>
+        <!-- Training and Staging Profiles -->
+        <profile>
+            <id>training</id>
+             <properties>
+                <lcec.jdbc.ip>10.103.30.33</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>LCECGQ5</lcec.jdbc.serviceName>
+                <lcec.jdbc.username>lcec</lcec.jdbc.username>
+                <lcec.jdbc.password>lcec</lcec.jdbc.password>
+                <lcec.jdbc.port>1521</lcec.jdbc.port>
+                
+                <!-- Environment name -->
+        		<environment.name>training</environment.name>
+             </properties>
+        </profile>
+                        
+        <profile>
+            <id>staging</id>
+            <properties>
+                <lcec.jdbc.ip>10.101.2.55</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>lcecbs1</lcec.jdbc.serviceName>
+                <lcec.jdbc.username>lcec</lcec.jdbc.username>
+                <lcec.jdbc.password>lcec</lcec.jdbc.password>
+                <lcec.jdbc.port>1526</lcec.jdbc.port>
+                
+                <!-- Environment name -->
+        		<environment.name>staging</environment.name>
+            </properties>
+        </profile>
+
+
+        <!-- Prod Build profile -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <!-- lcec specific settings -->
+                <lcec.jdbc.ip>10.101.2.221</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>LCECDB</lcec.jdbc.serviceName>
+                <lcec.jdbc.port>2598</lcec.jdbc.port>
+
+                <!-- Logging -->
+                <root_log_level>ERROR</root_log_level>
+                <log_level>ERROR</log_level>
+
+                <!-- SMTP -->
+                <lrn.smtp.host>mailhost.lax.lrn.com</lrn.smtp.host>
+                <lrn.smtp.port>25</lrn.smtp.port>
+                                
+                <!-- Environment name -->
+        		<environment.name>prod</environment.name>
+            </properties>
+        </profile>
+        
+        <!-- Prod UK Build profile -->
+        <profile>
+            <id>produk</id>
+            <properties>
+                <!-- lcec specific settings -->
+                <lcec.jdbc.ip>192.168.100.133</lcec.jdbc.ip>
+                <lcec.jdbc.serviceName>lcegeup</lcec.jdbc.serviceName>
+                <lcec.jdbc.port>2598</lcec.jdbc.port>
+
+                <!-- Logging -->
+                <root_log_level>ERROR</root_log_level>
+                <log_level>ERROR</log_level>
+
+                <!-- SMTP -->
+                <lrn.smtp.host>mailhost.lax.lrn.com</lrn.smtp.host>
+                <lrn.smtp.port>25</lrn.smtp.port>
+                                
+                <!-- Environment name -->
+        		<environment.name>produk</environment.name>
+            </properties>
+        </profile>
+    </profiles>
+</project>

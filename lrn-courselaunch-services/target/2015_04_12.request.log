@@ -1,4 +1,0 @@
-127.0.0.1 -  -  [Sun, 12 Apr 2015 14:50:07 GMT] "GET /lrnsecureservice/aContService.srv?WSDL HTTP/1.1" 200 1798 "-" "XMLBeans/2.4.0-unknown (org.apache.xmlbeans)"
-127.0.0.1 -  -  [Sun, 12 Apr 2015 14:50:07 GMT] "GET /lrnsecureservice/aContService.srv?wsdl=IAccessControlService.wsdl HTTP/1.1" 200 3743 "-" "XMLBeans/2.4.0-unknown (org.apache.xmlbeans)"
-127.0.0.1 -  -  [Sun, 12 Apr 2015 14:50:32 GMT] "POST /lrnsecureservice/aContService.srv HTTP/1.1" 200 305 "-" "Apache-HttpClient/4.1.1 (java 1.5)"
-127.0.0.1 -  -  [Sun, 12 Apr 2015 14:53:41 GMT] "POST /lrnsecureservice/aContService.srv HTTP/1.1" 200 305 "-" "Apache-HttpClient/4.1.1 (java 1.5)"
